@@ -1,0 +1,74 @@
+<mvc:View controllerName="sapui5.ExampleMasterDetailApp.controller.Detail" xmlns="sap.m" xmlns:semantic="sap.f.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:mvc="sap.ui.core.mvc">
+	<semantic:SemanticPage id="detailPage" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:titleHeading>
+			<Title text="{Ponumber}"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<ObjectAttribute title="{i18n>priceTitle}"/>
+		</semantic:headerContent>
+		<semantic:content>
+			<Table id="table0" items="{/PurchaseOrderItemSet}" noDataText="Listelenecek veri yok!">
+				<columns>
+					<Column id="column0">
+						<header>
+							<Label id="label0" text="Satınalma Kalem No"/>
+						</header>
+					</Column>
+					<Column id="column1">
+						<header>
+							<Label id="label1" text="Malzeme No"/>
+						</header>
+					</Column>
+					<Column id="column2">
+						<header>
+							<Label id="label2" text="Malzeme Tanımı"/>
+						</header>
+					</Column>
+					<Column id="column3">
+						<header>
+							<Label id="label3" text="Fiyat"/>
+						</header>
+					</Column>
+					<Column id="column4">
+						<header>
+							<Label id="label4" text="Miktar"/>
+						</header>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem counter="0" id="item1">
+						<cells>
+							<Text text="{Poitem}"/>
+							<Text text="{Matnr}"/>
+							<Text text="{Maktx}"/>
+							<Text text="{Netwr}"/>
+							<Text text="{Menge}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+		<!--Semantic ShareMenu Buttons-->
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onSendEmailPress"/>
+		</semantic:sendEmailAction>
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press=".onShareInJamPress"/>
+		</semantic:shareInJamAction>
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{detailView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+		<semantic:closeAction>
+			<semantic:CloseAction id="closeColumn" press=".onCloseDetailPress"/>
+		</semantic:closeAction>
+		<semantic:fullScreenAction>
+			<semantic:FullScreenAction id="enterFullScreen"
+				visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}" press=".toggleFullScreen"/>
+		</semantic:fullScreenAction>
+		<semantic:exitFullScreenAction>
+			<semantic:ExitFullScreenAction id="exitFullScreen"
+				visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}" press=".toggleFullScreen"/>
+		</semantic:exitFullScreenAction>
+	</semantic:SemanticPage>
+</mvc:View>
